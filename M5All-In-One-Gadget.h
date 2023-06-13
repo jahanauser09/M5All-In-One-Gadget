@@ -119,41 +119,58 @@
 #define WBGT_HUMI1DIGIT_Y_CRD 50
 #define WBGT_BLUEDOT_X_CRD 186
 #define WBGT_BLUEDOT_Y_CRD 50
-#define WBGT_TEMPDECIMAL_X_CRD 220
-#define WBGT_TEMPDECIMAL_Y_CRD 50
+#define WBGT_HUMIDECIMAL_X_CRD 220
+#define WBGT_HUMIDECIMAL_Y_CRD 50
 #define WBGT_PERCENT_X_CRD 253
 #define WBGT_PERCENT_Y_CRD 50
+
 #define WBGT_SITUATION_X_CRD 0
 #define WBGT_SITUATION_Y_CRD 100
 #define WBGT_BACK_X_CRD 120
 #define WBGT_BACK_Y_CRD 200
 
-
 // Music jpg image coordinate
-#define _X_CRD
-#define _Y_CRD
-#define _X_CRD
-#define _Y_CRD
-#define _X_CRD
-#define _Y_CRD
+#define MUSIC_SITUATION_X_CRD 0
+#define MUSIC_SITUATION_Y_CRD 0
+#define MUSIC_NAME_X_CRD 10
+#define MUSIC_NAME_Y_CRD 120
+#define MUSIC_PLAYANDSTOP_X_CRD 0
+#define MUSIC_PLAYANDSTOP_Y_CRD 200
+#define MUSIC_BACK_X_CRD 120
+#define MUSIC_BACK_Y_CRD 200
+#define MUSIC_NEXT_X_CRD 240
+#define MUSIC_NEXT_Y_CRD 200
 
 // Measure jpg image coordinate
-#define _X_CRD
-#define _Y_CRD
-#define _X_CRD
-#define _Y_CRD
-#define _X_CRD
-#define _Y_CRD
+#define MEASURE_SITUATION_X_CRD 0
+#define MEASURE_SITUATION_Y_CRD 0
+#define MEASURE_3DIGIT_X_CRD 10
+#define MEASURE_3DIGIT_Y_CRD 100
+#define MEASURE_2DIGIT_X_CRD 53
+#define MEASURE_2DIGIT_Y_CRD 100
+#define MEASURE_1DIGIT_X_CRD 96
+#define MEASURE_1DIGIT_Y_CRD 100
+#define MEASURE_BLUEDOT_X_CRD 139
+#define MEASURE_BLUEDOT_Y_CRD 100
+#define MEASURE_DECIMAL_X_CRD 182
+#define MEASURE_DECIMAL_Y_CRD 100
+#define MEASURE_CENTI_X_CRD 240
+#define MEASURE_CENTI_Y_CRD 100
+#define MEASURE_BACK_X_CRD 120
+#define MEASURE_BACK_Y_CRD 200
 
 // Date jpg image coordinate
-#define _X_CRD
-#define _Y_CRD
-#define _X_CRD
-#define _Y_CRD
-#define _X_CRD
-#define _Y_CRD
+#define DATE_SITUATION_X_CRD 0
+#define DATE_SITUATION_Y_CRD 0
+#define DATE_YEAR_X_CRD 10
+#define DATE_YEAR_Y_CRD 100
+#define DATE_TIME_X_CRD 40
+#define DATE_TIME_Y_CRD 150
+#define DATE_BACK_X_CRD 120
+#define DATE_BACK_Y_CRD 200
 
-typedef enum {
+typedef enum
+{
     TITLE,
     MENU,
     WBGT,
@@ -163,20 +180,23 @@ typedef enum {
     DATE
 } State;
 
-typedef enum {
+typedef enum
+{
     ENTRY,
     DO,
     EXIT
 } Action;
 
-typedef enum {
+typedef enum
+{
     MENU_WBGT,
     MENU_MUSIC,
     MENU_MEASURE,
     MENU_DATE
 } FocusState;
 
-typedef enum {
+typedef enum
+{
     SAFE,
     ATTENTION,
     ALERT,
