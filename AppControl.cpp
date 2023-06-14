@@ -180,32 +180,37 @@ void AppControl::displayTempHumiIndex()
 void AppControl::displayMusicInit()
 {
     mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_SITUATION_X_CRD, MUSIC_SITUATION_Y_CRD);
-    mlcd.displayText(mmplay.getTitle(), MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); //曲タイトル
 
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_PLAYANDSTOP_X_CRD, MUSIC_PLAYANDSTOP_Y_CRD);
-
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MUSIC_BACK_X_CRD, MUSIC_BACK_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_NEXT_IMG_PATH, MUSIC_NEXT_X_CRD, MUSIC_NEXT_Y_CRD);
 }
 
 void AppControl::displayMusicStop()
 {
-    // mlcd.displayJpgImageCoordinate(, MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); //曲タイトル
+    mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_SITUATION_X_CRD, MUSIC_SITUATION_Y_CRD);
+
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_PLAYANDSTOP_X_CRD, MUSIC_PLAYANDSTOP_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MUSIC_BACK_X_CRD, MUSIC_BACK_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_NEXT_IMG_PATH, MUSIC_NEXT_X_CRD, MUSIC_NEXT_Y_CRD);
 }
 
 void AppControl::displayMusicTitle()
 {
-    // mlcd.displayJpgImageCoordinate(, MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); //曲タイトル
+    mlcd.displayText(mmplay.getTitle(), MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); // 曲タイトル
 }
 
 void AppControl::displayNextMusic()
 {
+    mmplay.selectNextMusic();                                                     // 次曲を読み込む
+    mlcd.displayText("                    ", MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); // 無理やりだがいいのか？
+    mlcd.displayText(mmplay.getTitle(), MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD);      // 次曲タイトル
 }
 
 void AppControl::displayMusicPlay()
 {
     mlcd.displayJpgImageCoordinate(MUSIC_NOWPLAYING_IMG_PATH, MUSIC_SITUATION_X_CRD, MUSIC_SITUATION_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); //曲タイトル
+    mlcd.displayText(mmplay.getTitle(), MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); // 曲タイトル
 
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_STOP_IMG_PATH, MUSIC_PLAYANDSTOP_X_CRD, MUSIC_PLAYANDSTOP_Y_CRD);
 }
@@ -242,6 +247,8 @@ void AppControl::displayDateUpdate()
 
 void AppControl::controlApplication()
 {
+    mmplay.init(); // 指導員指示で追記
+
     while (1)
     {
 
@@ -410,6 +417,7 @@ void AppControl::controlApplication()
                 mlcd.clearDisplay();
                 mlcd.fillBackgroundWhite();
                 displayMusicInit();
+                displayMusicTitle();
                 setStateMachine(MUSIC_STOP, DO);
                 break;
 
@@ -426,7 +434,7 @@ void AppControl::controlApplication()
                 if (m_flag_btnC_is_pressed == true)
                 {
                     setBtnAllFlgFalse();
-                    // mlcd.displayJpgImageCoordinate(, MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); //次曲タイトルか？？
+                    displayNextMusic();
                 }
 
                 break;
@@ -458,21 +466,25 @@ void AppControl::controlApplication()
             case ENTRY:
                 mlcd.clearDisplay();
                 mlcd.fillBackgroundWhite();
+                mmplay.prepareMP3();
                 displayMusicPlay();
                 setStateMachine(MUSIC_PLAY, DO);
                 break;
 
             case DO:
+                
+                mmplay.isRunningMP3();
+                mmplay.playMP3();
                 if (m_flag_btnA_is_pressed == true)
                 {
+                    mmplay.stopMP3();
                     setBtnAllFlgFalse();
                     setStateMachine(MUSIC_PLAY, EXIT);
                 }
-                /*else if (/* condition ) //曲が終わったらの条件式
+                else if (mmplay.playMP3() == false) // 曲が終わったらの条件式
                 {
-                    /* code
                     setStateMachine(MUSIC_PLAY, EXIT);
-                }*/
+                }
 
                 break;
 
