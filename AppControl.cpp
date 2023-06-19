@@ -155,92 +155,177 @@ void AppControl::focusChangeImg(FocusState current_state, FocusState next_state)
 void AppControl::displayWBGTInit()
 {
     mlcd.displayJpgImageCoordinate(WBGT_TEMPERATURE_IMG_PATH, WBGT_TEMPERATURE_X_CRD, WBGT_TEMPERATURE_Y_CRD); // 温度
-    // mlcd.displayJpgImageCoordinate(, WBGT_TEMP2DIGIT_X_CRD, WBGT_TEMP2DIGIT_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, WBGT_TEMP1DIGIT_X_CRD, WBGT_TEMP1DIGIT_Y_CRD);
-    mlcd.displayJpgImageCoordinate(COMMON_ORANGEDOT_IMG_PATH, WBGT_ORANGEDOT_X_CRD, WBGT_ORANGEDOT_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, WBGT_TEMPDECIMAL_X_CRD, WBGT_TEMPDECIMAL_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_ORANGEDOT_IMG_PATH, WBGT_TDOT_X_CRD, WBGT_TDOT_Y_CRD);
     mlcd.displayJpgImageCoordinate(WBGT_DEGREE_IMG_PATH, WBGT_DEGREE_X_CRD, WBGT_DEGREE_Y_CRD);
 
     mlcd.displayJpgImageCoordinate(WBGT_HUMIDITY_IMG_PATH, WBGT_HUMIDITY_X_CRD, WBGT_HUMIDITY_Y_CRD); // 湿度
-    // mlcd.displayJpgImageCoordinate(, WBGT_HUMI2DIGIT_X_CRD, WBGT_HUMI2DIGIT_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, WBGT_HUMI1DIGIT_X_CRD, WBGT_HUMI1DIGIT_Y_CRD);
-    mlcd.displayJpgImageCoordinate(COMMON_BLUEDOT_IMG_PATH, WBGT_BLUEDOT_X_CRD, WBGT_BLUEDOT_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, WBGT_HUMIDECIMAL_X_CRD, WBGT_HUMIDECIMAL_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BLUEDOT_IMG_PATH, WBGT_HDOT_X_CRD, WBGT_HDOT_Y_CRD);
     mlcd.displayJpgImageCoordinate(WBGT_PERCENT_IMG_PATH, WBGT_PERCENT_X_CRD, WBGT_PERCENT_Y_CRD);
 
-    mlcd.displayJpgImageCoordinate(WBGT_SAFE_IMG_PATH, WBGT_SITUATION_X_CRD, WBGT_SITUATION_Y_CRD); // セーフのやつ
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, WBGT_BACK_X_CRD, WBGT_BACK_Y_CRD);
 }
 
 void AppControl::displayTempHumiIndex()
 {
-    // mwbgt.getTempHumi(); //温湿度取得するやつ/引数2つ何渡す？ワッツ？
+    // mlcd.displayJpgImageCoordinate(, WBGT_T2DIGIT_X_CRD, WBGT_T2DIGIT_Y_CRD);  //温度
+    // mlcd.displayJpgImageCoordinate(, WBGT_T1DIGIT_X_CRD, WBGT_T1DIGIT_Y_CRD);
+    // mlcd.displayJpgImageCoordinate(, WBGT_T1DECIMAL_X_CRD, WBGT_T1DECIMAL_Y_CRD);
+
+    // mlcd.displayJpgImageCoordinate(, WBGT_H2DIGIT_X_CRD, WBGT_H2DIGIT_Y_CRD);  //湿度
+    // mlcd.displayJpgImageCoordinate(, WBGT_H1DIGIT_X_CRD, WBGT_H1DIGIT_Y_CRD);
+    // mlcd.displayJpgImageCoordinate(, WBGT_H1DECIMAL_X_CRD, WBGT_H1DECIMAL_Y_CRD);
+
+    mlcd.displayJpgImageCoordinate(WBGT_SAFE_IMG_PATH, WBGT_NOTICE_X_CRD, WBGT_NOTICE_Y_CRD); // セーフのやつ
+
+    // mwbgt.getTempHumi(); //温湿度取得するやつ/引数2つ渡す？
 }
 
 void AppControl::displayMusicInit()
 {
-    mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_SITUATION_X_CRD, MUSIC_SITUATION_Y_CRD);
+    mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
 
-    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_PLAYANDSTOP_X_CRD, MUSIC_PLAYANDSTOP_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_STOP_X_CRD, MUSIC_STOP_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MUSIC_BACK_X_CRD, MUSIC_BACK_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_NEXT_IMG_PATH, MUSIC_NEXT_X_CRD, MUSIC_NEXT_Y_CRD);
 }
 
 void AppControl::displayMusicStop()
 {
-    mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_SITUATION_X_CRD, MUSIC_SITUATION_Y_CRD);
+    mlcd.displayJpgImageCoordinate(MUSIC_NOWSTOPPING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
 
-    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_PLAYANDSTOP_X_CRD, MUSIC_PLAYANDSTOP_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_PLAY_IMG_PATH, MUSIC_STOP_X_CRD, MUSIC_STOP_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MUSIC_BACK_X_CRD, MUSIC_BACK_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_NEXT_IMG_PATH, MUSIC_NEXT_X_CRD, MUSIC_NEXT_Y_CRD);
 }
 
 void AppControl::displayMusicTitle()
 {
-    mlcd.displayText(mmplay.getTitle(), MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); // 曲タイトル
+    mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD); // 曲タイトル
 }
 
 void AppControl::displayNextMusic()
 {
-    mmplay.selectNextMusic();                                                     // 次曲を読み込む
-    mlcd.displayText("                    ", MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); // 無理やりだがいいのか？
-    mlcd.displayText(mmplay.getTitle(), MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD);      // 次曲タイトル
+    mmplay.selectNextMusic();                                                       // 次曲を読み込む
+    mlcd.displayText("                    ", MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD); // 無理やりだがいいのか？
+    mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD);      // 次曲タイトル
 }
 
 void AppControl::displayMusicPlay()
 {
-    mlcd.displayJpgImageCoordinate(MUSIC_NOWPLAYING_IMG_PATH, MUSIC_SITUATION_X_CRD, MUSIC_SITUATION_Y_CRD);
-    mlcd.displayText(mmplay.getTitle(), MUSIC_NAME_X_CRD, MUSIC_NAME_Y_CRD); // 曲タイトル
+    mlcd.displayJpgImageCoordinate(MUSIC_NOWPLAYING_IMG_PATH, MUSIC_NOTICE_X_CRD, MUSIC_NOTICE_Y_CRD);
+    mlcd.displayText(mmplay.getTitle(), MUSIC_TITLE_X_CRD, MUSIC_TITLE_Y_CRD); // 曲タイトル
 
-    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_STOP_IMG_PATH, MUSIC_PLAYANDSTOP_X_CRD, MUSIC_PLAYANDSTOP_Y_CRD);
+    mlcd.displayJpgImageCoordinate(COMMON_BUTTON_STOP_IMG_PATH, MUSIC_PLAY_X_CRD, MUSIC_PLAY_Y_CRD);
 }
 
 void AppControl::displayMeasureInit()
 {
-    mlcd.displayJpgImageCoordinate(MEASURE_NOTICE_IMG_PATH, MEASURE_SITUATION_X_CRD, MEASURE_SITUATION_Y_CRD);
+    mlcd.displayJpgImageCoordinate(MEASURE_NOTICE_IMG_PATH, MEASURE_NOTICE_X_CRD, MEASURE_NOTICE_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, MEASURE_BACK_X_CRD, MEASURE_BACK_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, MEASURE_3DIGIT_X_CRD, MEASURE_3DIGIT_Y_CRD); //3桁目
-    // mlcd.displayJpgImageCoordinate(, MEASURE_2DIGIT_X_CRD, MEASURE_2DIGIT_Y_CRD); //2桁目
-    // mlcd.displayJpgImageCoordinate(, MEASURE_1DIGIT_X_CRD, MEASURE_1DIGIT_Y_CRD); //1桁目
-    mlcd.displayJpgImageCoordinate(COMMON_BLUEDOT_IMG_PATH, MEASURE_BLUEDOT_X_CRD, MEASURE_BLUEDOT_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, MEASURE_DECIMAL_X_CRD, MEASURE_DECIMAL_Y_CRD);  //小数第一
-    mlcd.displayJpgImageCoordinate(MEASURE_CM_IMG_PATH, MEASURE_CENTI_X_CRD, MEASURE_CENTI_Y_CRD);
+
+    mlcd.displayJpgImageCoordinate(COMMON_BLUEDOT_IMG_PATH, MEASURE_DOT_X_CRD, MEASURE_DOT_Y_CRD);
+
+    mlcd.displayJpgImageCoordinate(MEASURE_CM_IMG_PATH, MEASURE_CM_X_CRD, MEASURE_CM_Y_CRD);
 }
 
 void AppControl::displayMeasureDistance()
 {
+    int distance = mmdist.getDistance() * 10;
+    Serial.println(distance);
+
+    int digi3 = (((distance / 10) / 10) / 10) % 10;
+    Serial.println(digi3);
+    if (digi3 == 0)
+    {
+        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_FILLWHITE_IMG_PATH, MEASURE_DIGIT3_X_CRD, MEASURE_DIGIT3_Y_CRD);
+    }
+    else
+    {
+        mlcd.displayJpgImageCoordinate(g_str_blue[digi3], MEASURE_DIGIT3_X_CRD, MEASURE_DIGIT3_Y_CRD);
+    }
+
+    int digi2 = ((distance / 10) / 10) % 10;
+    Serial.println(digi2);
+    if (digi2 == 0 && digi3 == 0)
+    {
+        mlcd.displayJpgImageCoordinate(COMMON_BUTTON_FILLWHITE_IMG_PATH, MEASURE_DIGIT2_X_CRD, MEASURE_DIGIT2_Y_CRD);
+    }
+    else
+    {
+        mlcd.displayJpgImageCoordinate(g_str_blue[digi2], MEASURE_DIGIT2_X_CRD, MEASURE_DIGIT2_Y_CRD);
+    }
+
+    int digi1 = (distance / 10) % 10;
+    Serial.println(digi1);
+    mlcd.displayJpgImageCoordinate(g_str_blue[digi1], MEASURE_DIGIT1_X_CRD, MEASURE_DIGIT1_Y_CRD);
+
+    int deci = distance % 10;
+    Serial.println(deci);
+    mlcd.displayJpgImageCoordinate(g_str_blue[deci], MEASURE_DECIMAL_X_CRD, MEASURE_DECIMAL_Y_CRD);
+
+    /*for (int distanceState = 1; distanceState <= 4; distanceState++)
+    {
+        int i = distance % 10;
+
+        switch (distanceState)
+        {
+        case 1: // 小数第一
+            mlcd.displayJpgImageCoordinate(g_str_blue[i], MEASURE_DECIMAL_X_CRD, MEASURE_DECIMAL_Y_CRD);
+            Serial.print("dec   ");
+            Serial.println(i);
+
+            break;
+        case 2: // １桁目
+            mlcd.displayJpgImageCoordinate(g_str_blue[i], MEASURE_DIGIT1_X_CRD, MEASURE_DIGIT1_Y_CRD);
+            Serial.print("de1   ");
+            Serial.println(i);
+
+            break;
+        case 3: // ２桁目
+            if (i == 0)
+            {
+                mlcd.displayJpgImageCoordinate(COMMON_BUTTON_FILLWHITE_IMG_PATH, MEASURE_DIGIT2_X_CRD, MEASURE_DIGIT2_Y_CRD);
+                Serial.print("tr1   ");
+                Serial.println(i);
+            }
+            else
+            {
+                mlcd.displayJpgImageCoordinate(g_str_blue[i], MEASURE_DIGIT2_X_CRD, MEASURE_DIGIT2_Y_CRD);
+                Serial.print("fal1   ");
+                Serial.println(i);
+            }
+
+            break;
+        case 4: // ３桁目
+            if (i == 0)
+            {
+                mlcd.displayJpgImageCoordinate(COMMON_BUTTON_FILLWHITE_IMG_PATH, MEASURE_DIGIT3_X_CRD, MEASURE_DIGIT3_Y_CRD);
+                Serial.print("tr2   ");
+                Serial.println(i);
+            }
+            else
+            {
+                mlcd.displayJpgImageCoordinate(g_str_blue[i], MEASURE_DIGIT3_X_CRD, MEASURE_DIGIT3_Y_CRD);
+                Serial.print("fal2   ");
+                Serial.println(i);
+            }
+
+            break;
+        }
+        distance = distance / 10;
+    }*/
 }
 
 void AppControl::displayDateInit()
 {
-    mlcd.displayJpgImageCoordinate(DATE_NOTICE_IMG_PATH, DATE_SITUATION_X_CRD, DATE_SITUATION_Y_CRD);
+    mlcd.displayJpgImageCoordinate(DATE_NOTICE_IMG_PATH, DATE_NOTICE_X_CRD, DATE_NOTICE_Y_CRD);
     mlcd.displayJpgImageCoordinate(COMMON_BUTTON_BACK_IMG_PATH, DATE_BACK_X_CRD, DATE_BACK_Y_CRD);
 }
 
 void AppControl::displayDateUpdate()
 {
-    mlcd.displayDateText(mdtime.readDate(), DATE_YEAR_X_CRD, DATE_YEAR_Y_CRD); // ←時刻だすやつ。(String text, int x, int y)引数３つ
-    mlcd.displayDateText(mdtime.readTime(), DATE_TIME_X_CRD, DATE_TIME_Y_CRD); // ←時刻だすやつ。(String text, int x, int y)引数３つ
+    mlcd.displayDateText(mdtime.readDate(), DATE_YYYYMMDD_X_CRD, DATE_YYYYMMDD_Y_CRD); // ←日付だすやつ。(String text, int x, int y)引数３つ
+    mlcd.displayDateText(mdtime.readTime(), DATE_HHmmSS_X_CRD, DATE_HHmmSS_Y_CRD);     // ←時刻だすやつ。(String text, int x, int y)引数３つ
     // mdtime.readDate(); //日付取得
     // mdtime.readTime(); //時刻取得
 }
@@ -391,13 +476,19 @@ void AppControl::controlApplication()
                 break;
 
             case DO:
+                do
+                {
+                    displayTempHumiIndex();
+                    delay(100);
+                } while (m_flag_btnB_is_pressed == false);
+                setBtnAllFlgFalse();
+                setStateMachine(WBGT, EXIT);
 
-                delay(100);
-                if (m_flag_btnB_is_pressed == true)
+                /*if (m_flag_btnB_is_pressed == true)
                 {
                     setBtnAllFlgFalse();
                     setStateMachine(WBGT, EXIT);
-                }
+                }*/
                 break;
 
             case EXIT:
@@ -472,9 +563,18 @@ void AppControl::controlApplication()
                 break;
 
             case DO:
-                
-                mmplay.isRunningMP3();
+                do
+                {
+                    mmplay.isRunningMP3();
+                    mmplay.playMP3();
+                } while (m_flag_btnA_is_pressed == false || mmplay.playMP3() == false);
+                mmplay.stopMP3();
+                setBtnAllFlgFalse();
+                setStateMachine(MUSIC_PLAY, EXIT);
+
+                /*mmplay.isRunningMP3();
                 mmplay.playMP3();
+
                 if (m_flag_btnA_is_pressed == true)
                 {
                     mmplay.stopMP3();
@@ -484,7 +584,7 @@ void AppControl::controlApplication()
                 else if (mmplay.playMP3() == false) // 曲が終わったらの条件式
                 {
                     setStateMachine(MUSIC_PLAY, EXIT);
-                }
+                }*/
 
                 break;
 
@@ -506,18 +606,23 @@ void AppControl::controlApplication()
                 mlcd.clearDisplay();
                 mlcd.fillBackgroundWhite();
                 displayMeasureInit();
-
                 setStateMachine(MEASURE, DO);
                 break;
 
             case DO:
-                // displayMeasureDistance();
-                delay(100);
-                if (m_flag_btnB_is_pressed == true)
+                do
+                {
+                    displayMeasureDistance();
+                    delay(250);
+                } while (m_flag_btnB_is_pressed == false);
+                setBtnAllFlgFalse();
+                setStateMachine(MEASURE, EXIT);
+
+                /*if (m_flag_btnB_is_pressed == true)
                 {
                     setBtnAllFlgFalse();
                     setStateMachine(MEASURE, EXIT);
-                }
+                }*/
 
                 break;
 
@@ -543,13 +648,19 @@ void AppControl::controlApplication()
                 break;
 
             case DO:
-                displayDateUpdate();
-                delay(100);
-                if (m_flag_btnB_is_pressed == true)
+                do
+                {
+                    displayDateUpdate();
+                    delay(100);
+                } while (m_flag_btnB_is_pressed == false);
+                setBtnAllFlgFalse();
+                setStateMachine(DATE, EXIT);
+
+                /*if (m_flag_btnB_is_pressed == true)
                 {
                     setBtnAllFlgFalse();
                     setStateMachine(DATE, EXIT);
-                }
+                }*/
 
                 break;
 
