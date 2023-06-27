@@ -167,17 +167,103 @@ void AppControl::displayWBGTInit()
 
 void AppControl::displayTempHumiIndex()
 {
-    // mlcd.displayJpgImageCoordinate(, WBGT_T2DIGIT_X_CRD, WBGT_T2DIGIT_Y_CRD);  //温度
-    // mlcd.displayJpgImageCoordinate(, WBGT_T1DIGIT_X_CRD, WBGT_T1DIGIT_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, WBGT_T1DECIMAL_X_CRD, WBGT_T1DECIMAL_Y_CRD);
+    mwbgt.init();
+    double tm, hm;
+    WbgtIndex index;
+    mwbgt.getWBGT(&tm, &hm, &index);
+    Serial.println(tm);
+    Serial.println(hm);
+    Serial.println(index);
 
-    // mlcd.displayJpgImageCoordinate(, WBGT_H2DIGIT_X_CRD, WBGT_H2DIGIT_Y_CRD);  //湿度
-    // mlcd.displayJpgImageCoordinate(, WBGT_H1DIGIT_X_CRD, WBGT_H1DIGIT_Y_CRD);
-    // mlcd.displayJpgImageCoordinate(, WBGT_H1DECIMAL_X_CRD, WBGT_H1DECIMAL_Y_CRD);
+    int temp = tm * 10;
+    int humi = hm * 10;
 
-    mlcd.displayJpgImageCoordinate(WBGT_SAFE_IMG_PATH, WBGT_NOTICE_X_CRD, WBGT_NOTICE_Y_CRD); // セーフのやつ
+    for (int tm_state = 1; tm_state <= 3; tm_state++)
+    {
+        switch (tm_state)
+        {
+        case 1:
+            mlcd.displayJpgImageCoordinate(g_str_orange[temp % 10], WBGT_T1DECIMAL_X_CRD, WBGT_T1DECIMAL_Y_CRD);
+            break;
 
-    // mwbgt.getTempHumi(); //温湿度取得するやつ/引数2つ渡す？
+        case 2:
+            mlcd.displayJpgImageCoordinate(g_str_orange[temp % 10], WBGT_T1DIGIT_X_CRD, WBGT_T1DIGIT_Y_CRD);
+            break;
+
+        case 3:
+            if (temp % 10 == 0)
+            {
+                mlcd.displayJpgImageCoordinate(COMMON_ORANGEFILLWHITE_IMG_PATH, WBGT_T2DIGIT_X_CRD, WBGT_T2DIGIT_Y_CRD);
+            }
+            else
+            {
+                mlcd.displayJpgImageCoordinate(g_str_orange[temp % 10], WBGT_T2DIGIT_X_CRD, WBGT_T2DIGIT_Y_CRD);
+            }
+
+            break;
+
+        default:
+            break;
+        }
+        temp = temp / 10;
+    }
+
+    for (int hm_state = 1; hm_state <= 3; hm_state++)
+    {
+        switch (hm_state)
+        {
+        case 1:
+            mlcd.displayJpgImageCoordinate(g_str_blue[humi % 10], WBGT_H1DECIMAL_X_CRD, WBGT_H1DECIMAL_Y_CRD);
+            break;
+
+        case 2:
+            mlcd.displayJpgImageCoordinate(g_str_blue[humi % 10], WBGT_H1DIGIT_X_CRD, WBGT_H1DIGIT_Y_CRD);
+            break;
+
+        case 3:
+            if (humi % 10 == 0)
+            {
+                mlcd.displayJpgImageCoordinate(COMMON_BLUEFILLWHITE_IMG_PATH, WBGT_H2DIGIT_X_CRD, WBGT_H2DIGIT_Y_CRD); // 湿度
+            }
+            else
+            {
+                mlcd.displayJpgImageCoordinate(g_str_blue[humi % 10], WBGT_H2DIGIT_X_CRD, WBGT_H2DIGIT_Y_CRD);
+            }
+
+            break;
+
+        default:
+            break;
+        }
+        humi = humi / 10;
+    }
+
+    switch (index)
+    {
+    case SAFE:
+        mlcd.displayJpgImageCoordinate(WBGT_SAFE_IMG_PATH, WBGT_NOTICE_X_CRD, WBGT_NOTICE_Y_CRD); // セーフのやつ
+
+        break;
+    case ATTENTION:
+        mlcd.displayJpgImageCoordinate(WBGT_ATTENTION_IMG_PATH, WBGT_NOTICE_X_CRD, WBGT_NOTICE_Y_CRD); // セーフのやつ
+
+        break;
+    case ALERT:
+        mlcd.displayJpgImageCoordinate(WBGT_ALERT_IMG_PATH, WBGT_NOTICE_X_CRD, WBGT_NOTICE_Y_CRD); // セーフのやつ
+
+        break;
+    case HIGH_ALERT:
+        mlcd.displayJpgImageCoordinate(WBGT_HIGH_ALERT_IMG_PATH, WBGT_NOTICE_X_CRD, WBGT_NOTICE_Y_CRD); // セーフのやつ
+
+        break;
+    case DANGER:
+        mlcd.displayJpgImageCoordinate(WBGT_DANGER_IMG_PATH, WBGT_NOTICE_X_CRD, WBGT_NOTICE_Y_CRD); // セーフのやつ
+
+        break;
+
+    default:
+        break;
+    }
 }
 
 void AppControl::displayMusicInit()
@@ -233,7 +319,7 @@ void AppControl::displayMeasureDistance()
     int distance = mmdist.getDistance() * 10;
     Serial.println(distance);
 
-    int digi3 = (((distance / 10) / 10) / 10) % 10;
+    int digi3 = (((distance / 10) / 10) / 10) % 10; // ３桁目
     Serial.println(digi3);
     if (digi3 == 0)
     {
@@ -244,7 +330,7 @@ void AppControl::displayMeasureDistance()
         mlcd.displayJpgImageCoordinate(g_str_blue[digi3], MEASURE_DIGIT3_X_CRD, MEASURE_DIGIT3_Y_CRD);
     }
 
-    int digi2 = ((distance / 10) / 10) % 10;
+    int digi2 = ((distance / 10) / 10) % 10; // ２桁目
     Serial.println(digi2);
     if (digi2 == 0 && digi3 == 0)
     {
@@ -255,59 +341,57 @@ void AppControl::displayMeasureDistance()
         mlcd.displayJpgImageCoordinate(g_str_blue[digi2], MEASURE_DIGIT2_X_CRD, MEASURE_DIGIT2_Y_CRD);
     }
 
-    int digi1 = (distance / 10) % 10;
+    int digi1 = (distance / 10) % 10; // １桁目
     Serial.println(digi1);
     mlcd.displayJpgImageCoordinate(g_str_blue[digi1], MEASURE_DIGIT1_X_CRD, MEASURE_DIGIT1_Y_CRD);
 
-    int deci = distance % 10;
+    int deci = distance % 10; // 小数第一
     Serial.println(deci);
     mlcd.displayJpgImageCoordinate(g_str_blue[deci], MEASURE_DECIMAL_X_CRD, MEASURE_DECIMAL_Y_CRD);
 
     /*for (int distanceState = 1; distanceState <= 4; distanceState++)
     {
-        int i = distance % 10;
-
         switch (distanceState)
         {
         case 1: // 小数第一
-            mlcd.displayJpgImageCoordinate(g_str_blue[i], MEASURE_DECIMAL_X_CRD, MEASURE_DECIMAL_Y_CRD);
+            mlcd.displayJpgImageCoordinate(g_str_blue[distance % 10], MEASURE_DECIMAL_X_CRD, MEASURE_DECIMAL_Y_CRD);
             Serial.print("dec   ");
-            Serial.println(i);
+            Serial.println(distance);
 
             break;
         case 2: // １桁目
-            mlcd.displayJpgImageCoordinate(g_str_blue[i], MEASURE_DIGIT1_X_CRD, MEASURE_DIGIT1_Y_CRD);
+            mlcd.displayJpgImageCoordinate(g_str_blue[distance % 10], MEASURE_DIGIT1_X_CRD, MEASURE_DIGIT1_Y_CRD);
             Serial.print("de1   ");
-            Serial.println(i);
+            Serial.println(distance);
 
             break;
         case 3: // ２桁目
-            if (i == 0)
+            if (distance % 10 == 0)
             {
                 mlcd.displayJpgImageCoordinate(COMMON_BUTTON_FILLWHITE_IMG_PATH, MEASURE_DIGIT2_X_CRD, MEASURE_DIGIT2_Y_CRD);
                 Serial.print("tr1   ");
-                Serial.println(i);
+                Serial.println(distance);
             }
             else
             {
-                mlcd.displayJpgImageCoordinate(g_str_blue[i], MEASURE_DIGIT2_X_CRD, MEASURE_DIGIT2_Y_CRD);
+                mlcd.displayJpgImageCoordinate(g_str_blue[distance % 10], MEASURE_DIGIT2_X_CRD, MEASURE_DIGIT2_Y_CRD);
                 Serial.print("fal1   ");
-                Serial.println(i);
+                Serial.println(distance);
             }
 
             break;
         case 4: // ３桁目
-            if (i == 0)
+            if (distance % 10 == 0)
             {
                 mlcd.displayJpgImageCoordinate(COMMON_BUTTON_FILLWHITE_IMG_PATH, MEASURE_DIGIT3_X_CRD, MEASURE_DIGIT3_Y_CRD);
                 Serial.print("tr2   ");
-                Serial.println(i);
+                Serial.println(distance);
             }
             else
             {
-                mlcd.displayJpgImageCoordinate(g_str_blue[i], MEASURE_DIGIT3_X_CRD, MEASURE_DIGIT3_Y_CRD);
+                mlcd.displayJpgImageCoordinate(g_str_blue[distance % 10], MEASURE_DIGIT3_X_CRD, MEASURE_DIGIT3_Y_CRD);
                 Serial.print("fal2   ");
-                Serial.println(i);
+                Serial.println(distance);
             }
 
             break;
